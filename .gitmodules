@@ -1,0 +1,3 @@
+[submodule "android/KeyframeLibDemo/keyframelib"]
+	path = android/KeyframeLibDemo/keyframelib
+	url = https://github.com/ltivn/keyframelib
