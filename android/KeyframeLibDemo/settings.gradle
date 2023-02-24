@@ -3,6 +3,8 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 dependencyResolutionManagement {
@@ -10,7 +12,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+
+        maven { url "https://jitpack.io" }
+
+        flatDir {
+            dirs './keyframelib/libs'
+        }
+
     }
 }
 rootProject.name = "KeyframeLibDemo"
 include ':app'
+include ':keyframelib'

@@ -1,0 +1,32 @@
+subprojects {
+    ext.appBaseUrlApiDemo = "\"https://v4kdemo.breecesystem.com\""
+    ext.appBaseUrlApiProd = "\"https://v4k.breecesystem.com\""
+    ext.allowExtraLog = true
+    ext.appInTestMode = true
+    if(appInTestMode){
+        ext.appBaseUrlApi = appBaseUrlApiDemo
+    } else {
+        ext.appBaseUrlApi = appBaseUrlApiProd
+    }
+
+    //appVersionName must be x.x.x  and should not add any detail due to server cannot work
+    ext.appVersionName = "0.3.101"
+    ext.appVersionCode = 3_1010
+    ext.appBuildName = "vision4k-" + appVersionName
+    ext.appMinSdkVersion = 21
+    ext.appSupportVersion = "28.0.0"
+    ext.appCompileSdkVersion = 28
+    ext.appBuildToolsVersion = "28.0.3"
+    ext.appTargetSdkVersion = 27
+    ext.appBuildTime = "\"" + System.currentTimeMillis() + "\"";
+
+    if (appBaseUrlApi == appBaseUrlApiProd) {
+        ext.appBuildName = ext.appBuildName + "-PROD"
+    } else {
+        ext.appBuildName = ext.appBuildName + "-DEMO"
+    }
+
+    if (appInTestMode) {
+        ext.appBuildName = ext.appBuildName + "-HAVE-HARDCODE-CANNOT-USE-THIS-FILE"
+    }
+}
