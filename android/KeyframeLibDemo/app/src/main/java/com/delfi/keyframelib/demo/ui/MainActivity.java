@@ -1,27 +1,28 @@
-package com.delfi.keyframelib.demo;
+package com.delfi.keyframelib.demo.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.delfi.keyframelib.demo.R;
+import com.delfi.keyframelib.demo.utils.KeyEventManager;
 import com.delfi.keyframelib.keyframe.Keyframe;
-import com.delfi.keyframelib.utils.SlotType;
-
-import java.io.File;
-import java.util.List;
 
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity implements Keyframe.KeyframeListenner{
+public class MainActivity extends AppCompatActivity implements Keyframe.KeyframeListenner, KeyEventManager.View {
 
 
-    Keyframe mKeyframe;
+    private KeyEventManager mKeyEventManager;
+    private Keyframe mKeyframe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hideSystemUI();
+        mKeyEventManager = new KeyEventManager(this);
         setupKeyframe();
     }
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements Keyframe.Keyframe
         hideSystemUI();
     }
 
-    private void setupKeyframe() {
+    public void setupKeyframe() {
         try {
             mKeyframe = new Keyframe(this);
             mKeyframe.setDebugInfo("DEMO Keyframelib",this);
@@ -74,5 +75,11 @@ public class MainActivity extends AppCompatActivity implements Keyframe.Keyframe
                 | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        return mKeyEventManager.dispatchKeyEvent(event);
     }
 }
